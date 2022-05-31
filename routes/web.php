@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\StripeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,16 @@ Route::post('/produto/comprar/{id}', [EventController::class, 'joinProduct'])->m
 Route::delete('/produto/deletar/{id}', [EventController::class, 'leaveProduct'])->middleware('auth');
 
 Route::get('/compras', [EventController::class, 'shop'])->middleware('auth');
+
+Route::get('stripe', [StripeController::class, 'stripe']);
+
+/*----------------------------------------------------------*/
+
+Route::post('/add-rating', [EventController::class, 'add']);
+
+/*----------------------------------------------------------*/
+
+Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.post');
 
 /*Route::middleware([
     'auth:sanctum',

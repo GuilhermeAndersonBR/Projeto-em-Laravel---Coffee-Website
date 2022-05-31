@@ -200,10 +200,29 @@ class EventController extends Controller
         $user = auth()->user();
 
         $events = $user->events;
-
+        
         $productsAsParticipant = $user->productsAsParticipant;
 
-        return view('events.shopping', ['events' => $events, 'productsAsParticipant' => $productsAsParticipant]);
+        $total = $productsAsParticipant->sum('price');
+        
+        /*
+        {{-- c = 0 --}}
+        {{-- c = c + produto.valor --}}
+        */
+
+        return view('events.shopping', [
+            'events' => $events, 
+            'productsAsParticipant' => $productsAsParticipant,
+            'total' => $total,
+        ]);
+
+    }
+
+    /*----------------------------------------------------------*/
+
+    public function add(Request $request) {
+
+        $rating = $request->input('product_rating');
 
     }
 

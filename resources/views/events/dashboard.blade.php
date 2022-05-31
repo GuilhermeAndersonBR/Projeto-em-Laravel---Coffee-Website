@@ -14,10 +14,10 @@
                 <h1>Meus Produtos</h1>
             </div>
             @if(count($events) > 0 && $events != null)
-            <table class="table">
+            <table class="table-content table bg-dark">
                 <thead>
                     <tr class="text-white">
-                        <th scope="col">#</th>
+                        <th scope="col">Quant.</th>
                         <th scope="col">Nome</th>
                         <th scope="col">Imagem</th>
                         <th scope="col">Acessos</th>
@@ -30,7 +30,7 @@
                     @foreach($events as $event)
                         <tr class="text-white">
                             <td scope="row">{{ $loop->index + 1 }}</td>
-                            <td><a href="/produto/{{ $event->id }}">{{ $event->name }}</a></td>
+                            <td><a class="text-white border-bottom border-light" href="/produto/{{ $event->id }}"><h2>{{ $event->name }}</h2></a></td>
                             <td><img style="width: 40px;" src="/img/products/{{ $event->image }}" alt="{{ $event->name }}"></td>
                             <td>0</td>
                             @if ($event->users !== null)
@@ -51,7 +51,7 @@
                 </tbody>
             </table>
             @else
-            <p>Você ainda não tem eventos, <a href="/criar">criar evento</a></p>
+            <p>Você ainda não tem Produtos, <a href="/criar">criar Produto</a></p>
             @endif
         </div>
     </div>

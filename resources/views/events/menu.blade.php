@@ -13,11 +13,11 @@
     <div class="container">
 
        <div class="row align-items-center text-center text-md-left min-vh-100">
-          <div class="col-md-6">
-             <span>coffee house</span>
-             <h3>start your day with our coffee</h3>
-             <a href="#" class="link-btn">get started</a>
-          </div>
+         <div class="col-md-6">
+            <span>Cafeteria Little cup</span>
+            <h3>Comece seu dia com um bom café!</h3>
+            <a href="#" class="link-btn">Inicie</a>
+         </div>
        </div>
 
     </div>
@@ -30,7 +30,7 @@
 
  <section class="menu" id="menu">
 
-   <h1 class="heading"> our menu </h1>
+   <h1 class="heading"> Cardápio </h1>
    <h1 class="d-flex justify-content-center">Busque um Produto</h1>
    <div id="search-container" class="mb-5">
       
@@ -40,37 +40,39 @@
       </form>
    </div>
 
-    <script>
-       var loadingMenuBox = document.getElementById('loadingMenuBox');
-       function loadingMenuBox() {
-          if(loadingMenuBox.style.opacity == '0') {
-             loadingMenuBox.style.opacity = '100';
-          } else {
-             loadingMenuBox.style.opacity = '0';
-          }
-       }
-    </script>
-
     <div id="loadingMenuBox" onload="loadMenuBox()" class="container box-container">
+      @if(count($events) > 0)
+         @foreach($events as $event)
+         <div class="box">
+            <img src="/img/products/{{ $event->image }}" alt="">
+            <h3>{{ $event->name }}</h3>
+            <p>{{ $event->description }}</p>
+            <p>Compradores: {{ count($event->users) }}</p>
+            <a href="/produto/{{ $event->id }}" class="link-btn">Saber Mais</a>
+         </div>
+         @endforeach
 
-      @foreach($events as $event)
-      <div class="box">
-         <img src="/img/products/{{ $event->image }}" alt="">
-         <h3>{{ $event->name }}</h3>
-         <p>{{ $event->description }}</p>
-         <p>Compradores: {{ count($event->users) }}</p>
-         <a href="/produto/{{ $event->id }}" class="link-btn">read more</a>
-      </div>
-      @endforeach
-
-      @if(count($events) == 0 && $search)
-      <div class="container">
-         <h3>Nenhum Produto foi encontrado</h3>
-         <a href="/menu" class="link-btn">Selecione aqui para acessar todos os Produtos</a>
-      </div>
+         @if(count($events) == 0 && $search)
+         <div class="container">
+            <h3>Nenhum Produto foi encontrado</h3>
+            <a href="/menu" class="link-btn">Selecione aqui para acessar todos os Produtos</a>
+         </div>
+         @endif
+      @else
+         <div class="w-100 d-flex justify-content-center">
+            <h2>Não há produtos</h2>
+         </div>
       @endif
 
     </div>
+   
+   <script>
+      var loadingMenuBox = document.getElementById('loadingMenuBox');
+      
+      function loadingMenuBox() {
+        loadingMenuBox.style.display = 'none';
+      }
+   </script>
 
 </section>
 @endsection

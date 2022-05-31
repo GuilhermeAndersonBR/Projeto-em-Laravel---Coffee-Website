@@ -54,16 +54,16 @@
         
             <div class="row align-items-center">
         
-                <a href="/" class="logo mr-auto"> <i class="fas fa-mug-hot"></i> coffee </a>
+                <a href="/" class="logo mr-auto"> <i class="fas fa-coffee"></i> Little Cup </a>
         
                 <nav class="nav">
                     @auth
-                    <a href="/criar">criar</a>
-                    <a href="/dashboard">seus produtos</a>
+                    <a href="/criar">Criar</a>
+                    <a href="/dashboard">Seus produtos</a>
                     @endauth
-                    <a href="/menu">menu</a>
-                    <a href="/contact">contact</a>
-                    <a href="#blogs">blogs</a>
+                    <a href="/menu">Cardápio</a>
+                    <a href="/contact">Contatos</a>
+                    <a href="#blogs">Posts</a>
                 </nav>
                 
                 <div class="icons">
@@ -90,25 +90,28 @@
             <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <div id="close-login-form" class="fas fa-times"></div>
-                <a href="#" class="logo mr-auto"> <i class="fas fa-mug-hot"></i> coffee </a><hr>
-                <h3>let's start a new great day</h3>
+
+                <x-jet-validation-errors style="color:red;" />
+
+                <a href="/" class="logo mr-auto"> <i class="fas fa-coffee"></i> Little Cup </a><hr>
+                <h3>Comece seu dia com um bom café!</h3>
                 <x-jet-label  for="email" value="{{ __('Email') }}" />
-                <x-jet-input class="box" id="email" type="email" name="email" :value="old('email')" required autofocus placeholder="enter your email"/>
-                <x-jet-label for="password" value="{{ __('Password') }}" />
-                <x-jet-input class="box" id="password" type="password" name="password" required autocomplete="current-password" placeholder="enter your password"/>
+                <x-jet-input class="box" id="email" type="email" name="email" :value="old('email')" required autofocus placeholder="Insira seu email"/>
+                <x-jet-label for="password" value="{{ __('Senha') }}" />
+                <x-jet-input class="box" id="password" type="password" name="password" required autocomplete="current-password" placeholder="Insira sua senha"/>
                 <div class="flex">
                     <x-jet-checkbox type="checkbox" id="remember-me" name="remember" />
-                    <span for="remember-me">{{ __('Remember me') }}</span>
+                    <span for="remember-me">{{ __('Lembrar de mim') }}</span>
                     @if (Route::has('password.request'))
                         <a href="{{ route('password.request') }}">
-                            {{ __('Forgot your password?') }}
+                            {{ __('Esqueceu sua senha?') }}
                         </a>
                     @endif
                 </div>
                 <x-jet-button class="link-btn bg-dark">
-                    {{ __('Log Now') }}
+                    {{ __('Entrar') }}
                 </x-jet-button>
-                <p class="account">don't have an account? <a href="/register">create one!</a></p>
+                <p class="account">Não possui uma conta conosco? <a href="/register">crie uma!</a></p>
             </form>
             @endguest
 
@@ -116,9 +119,9 @@
             <form action="/logout" method="POST">
                 @csrf
                 <div id="close-login-form" class="fas fa-times"></div>
-                <a href="#" class="logo mr-auto"> <i class="fas fa-mug-hot"></i> coffee </a><hr>
-                <a href="/profile"><h2 class="logo">Olá {{ Auth::user()->name }}.</h2></a>
-                <h3>let's start a new great day</h3>
+                <a href="#" class="logo mr-auto"> <i class="fas fa-coffee"></i> Little cup </a><hr>
+                <a href="/profile"><h2 class="logo">Olá, {{ Auth::user()->name }}.</h2></a>
+                <h3>vamos começar um novo grande dia</h3>
                 <h4>{{ Auth::user()->email }}</h4>
                 <a href="/logout" 
                   class="link-btn bg-dark text-white" 
@@ -130,30 +133,36 @@
             @endauth
         </div>
 
-        <main id="">
-            
+        <main id="" class="w-100 min-vh-100">
             @if(session('msg'))
-            <p class="msg">{{ session('msg') }}</p>
+            <div class="mensage-container bg-success d-flex align-items-center justify-content-center text-white w-100 p-5 m-0">
+                <h1 class="msg m-0 p-0">{{ session('msg') }}</h1>
+            </div>
             @endif
+            
+            
         @yield('main-content')
         </main>
 
-        <section class="newsletter">
-            <div class="container">
-                <h3>newsletter</h3>
-                <p>subscribe for latest upadates</p>
-                <form action="">
-                    <input type="email" name="" placeholder="enter your email" id="" class="email">
-                    <input type="submit" value="subscribe" class="link-btn">
-                </form>
-            </div>
-        </section>
+        <!--
+            <section class="newsletter">
+                <div class="container">
+                    <h3>newsletter</h3>
+                    <p>subscribe for latest upadates</p>
+                    <form action="">
+                        <input type="email" name="" placeholder="enter your email" id="" class="email">
+                        <input type="submit" value="subscribe" class="link-btn">
+                    </form>
+                </div>
+            </section>
+        -->
 
         <section class="footer container">
 
-            <a href="#" class="logo"> <i class="fas fa-mug-hot"></i> coffee </a>
+            <a href="#" class="logo"> <i class="fas fa-mug-hot"></i> Little Cup</a>
 
-            <p class="credit"> created by <span>Guilherme</span> | all rights reserved! </p>
+            <p class="credit"> criado por: <span>Esquadrão eeepeense</span> | todos os direitos reservados! </p>
+            <p class="credit">Conta teste: <span>teste123@gmail.com</span> Senha: <span>teste123</span></p>
 
             <div class="share">
                 <a href="#" class="fab fa-facebook-f"></a>
@@ -166,14 +175,6 @@
     </div>
 
 <!-- footer section ends -->
-
-
-
-
-
-
-
-
 
 <!-- custom js file link  -->
 <script src="/js/script.js"></script>

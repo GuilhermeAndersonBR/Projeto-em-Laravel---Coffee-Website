@@ -22,7 +22,7 @@
                     </div>
                     <div class="form-group">
                         <label for="title">Preço:</label>
-                        <input type="number" class="form-control" id="price" name="price" placeholder="Preço do Produto">
+                        <input type="number" step="0.2" class="form-control" id="price" name="price" placeholder="Preço do Produto">
                     </div>
                     <div class="form-group">
                         <label for="title">Quantidade:</label>
